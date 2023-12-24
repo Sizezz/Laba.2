@@ -5,7 +5,7 @@ from Sort import tree_sort
 
 unsortedList = []
 sorted_list = []
-
+RandomUnsortedList = []
 while True:
     print("1. Add a numbers")
     print("2. Generate a random array")
@@ -22,9 +22,9 @@ while True:
         if add_choice == "1":
             unsortedList = []
         elif add_choice == "2":
-            if not sorted_list:
+            if not unsortedList:
                 print("No existing array found. Starting with a new array.")
-                sorted_list = []
+                unsortedList = []
             else:
                 print("Adding numbers to the existing array.")
         else:
@@ -52,17 +52,20 @@ while True:
 
         minimum = float(input("Enter the minimum value: "))
         maximum = float(input("Enter the maximum value: "))
+        while maximum <= minimum:
+            print("Error: Maximum value should be greater than the minimum value.")
+            maximum = float(input("Enter the maximum value: "))
 
-        unsortedList.extend(round(random.uniform(minimum, maximum), 1) for _ in range(length))
-        print("Random array generated: ", unsortedList)
+        RandomUnsortedList.extend(round(random.uniform(minimum, maximum), 1) for _ in range(length))
+        print("Random array generated: ", RandomUnsortedList)
 
         add_choice = input("Do you want to add this randomly generated array to the existing array? (y/n): ")
         if add_choice.lower() == 'y':
-            if not sorted_list:
-                sorted_list.append(unsortedList)
+            if not RandomUnsortedList:
+                unsortedList.append(RandomUnsortedList)
                 print("Adding the randomly generated array to the existing array.")
         elif add_choice.lower() == 'n':
-            unsortedList.clear()
+            RandomUnsortedList.clear()
             print("Okay, the randomly generated array will not be added.")
         else:
             print("Invalid choice. Please enter 'y' or 'n'.")
